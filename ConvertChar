@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+
+namespace App11
+{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class MainPage : Page
+    {
+        public MainPage()
+        {
+            this.InitializeComponent();
+        }
+
+        private string convertNvarcharToVarchar(string s)
+        {
+            string _s="";
+            foreach (char c in s)
+                _s += convertChar(c);
+                return _s;
+        }
+
+        private char convertChar(char c)
+        {
+            char rs = c;
+            switch(c)
+            {
+                case 'á':case 'à':case 'ả':case 'ã':case 'ạ':
+                case 'ă':case 'ắ':case 'ằ':case 'ẵ':case 'ặ':case 'ẳ':
+                case 'â':case 'ấ':case 'ầ':case 'ẫ':case 'ẩ':case 'ậ':
+                    rs = 'a';
+                    break;
+                case 'ó':case 'ò':case 'ỏ':case 'õ':case 'ọ':
+                case 'ơ':case 'ớ':case 'ờ':case 'ở':case 'ỡ':case 'ợ':
+                case 'ô':case 'ố':case 'ồ':case 'ổ':case 'ỗ':case 'ộ':
+                    rs = 'o';
+                    break;
+                case 'é':case 'è':case 'ẽ':case 'ẻ':case 'ẹ':
+                case 'ê':case 'ế':case 'ề':case 'ể':case 'ễ':case 'ệ':
+                    rs = 'e';
+                    break;
+                case 'í':case 'ì':case 'ĩ':case 'ỉ':case 'ị':
+                    rs = 'i';
+                    break;
+                case 'ú':case 'ù':case 'ủ':case 'ũ':case 'ụ':
+                case 'ư':case 'ứ':case 'ừ':case 'ữ':case 'ử':case 'ự':
+                    rs = 'u';
+                    break;
+                case 'ý':case 'ỳ':case 'ỹ':case 'ỷ':case 'ỵ':
+                    rs = 'y';
+                    break;
+                case 'đ':
+                    rs = 'd';
+                    break;
+                default: break;
+            }
+            return rs;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string s = txt.Text;
+            txt_Copy.Text = convertNvarcharToVarchar(s);
+        }
+    }
+}
